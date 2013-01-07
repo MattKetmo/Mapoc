@@ -1,0 +1,279 @@
+@import "compass";
+@import "compass/reset";
+
+body {
+    background: #f4f4f4;
+    font-family: Helvetica, arial, freesans, clean, sans-serif;
+    overflow-y: scroll;
+}
+
+//* { box-sizing: border-box }
+
+a {
+    color: #4d90fe;
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.site-container {
+    width: 700px;
+    margin: auto;
+}
+
+.site-content {
+    margin-top: 70px;
+}
+
+.search-form {
+    width: 480px + 2*8px + 10px + 85px + 2px;
+    clear: both;
+    position: relative;
+    margin: auto;
+    margin-bottom: 30px;
+
+    input[type="text"] {
+        display: inline-block;
+        float: left;
+        padding: 4px 8px;
+        width: 480px;
+        height: 28px;
+        font-size: 16px;
+        line-height: 28px;
+        color: #333;
+        border: solid 1px #d9d9d9;
+        border-top: solid 1px #c0c0c0;
+        @include box-shadow(none);
+        @include transition(border linear 0.2s, box-shadow linear 0.2s);
+        //@include border-radius(2px);
+
+        &:hover {
+            border: solid 1px #b4b4b4;
+        }
+
+        &:focus {
+            outline: none;
+            border: solid 1px #3079ed;
+            @include box-shadow(0 0 5px #ccc);
+        }
+    }
+
+    input[type="submit"] {
+        float: left;
+        margin-left: 10px;
+        display: inline-block;
+        cursor: pointer;
+        width: 85px;
+        height: 37px;
+        line-height: 37px;
+        font-size: 0;
+        text-indent: -999px;
+        color: transparent;
+        background: image-url('ico-search.png') no-repeat #4d90fe center;
+        border: 1px solid #3079ed;
+        @include border-radius(2px);
+
+        &:hover,
+        &:focus {
+            background-color: #3079ed;
+            outline: none;
+        }
+        &:active {
+            @include box-shadow(0 0 10px #ccc);
+        }
+    }
+}
+
+.card {
+    @include box-shadow(0 2px 5px -1px #ddd);
+    padding: 15px;
+    background: #fdfdfd;
+    border: solid 1px #d9d9d9;
+    position: relative;
+    overflow: hidden;
+
+    .inner { }
+
+    header {
+        margin-bottom: 20px;
+        position: relative;
+    }
+    h2 {
+        font-size: 1.4em;
+        margin-bottom: 5px;
+    }
+    .formatted-address {
+        font-size: 1em;
+        color: #aaa;
+    }
+    .types {
+        position: absolute;
+        top: 0;
+        right: 0;
+        line-height: 1em;
+        font-size: 0.8em;
+        color: #ccc;
+        max-width: 100px;
+        text-align: right;
+        direction: rtl;
+    }
+    &:hover .types {
+        color: #aaa;
+    }
+
+    dt, dd {
+        line-height: 20px;
+        font-size: 0.9em;
+    }
+    dt {
+        float: left;
+        width: 100px;
+        overflow: hidden;
+        clear: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+    dd {
+        margin-left: 120px;
+    }
+
+    .map {
+        background: #ccc;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 300px;
+        height: 100%;
+        overflow: hidden;
+
+        img.static-map {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 400px;
+            margin-top: -200px; // Half the height
+            margin-left: -150px; // Half the width
+        }
+    }
+}
+
+.results {
+}
+
+.sub-results {
+    .card {
+        @include transition(all 0.1s ease);
+
+        > .inner {
+            @include transition(margin-top 0.1s ease);
+        }
+    }
+
+    &.hide {
+        .card {
+            padding: 0;
+            height: 0px;
+            min-height: 0;
+            border: none;
+            > .inner {
+                display: none;
+            }
+        }
+    }
+    &.fold {
+        &:hover {
+            cursor: pointer;
+
+            .card {
+                background: #f8f8f8;
+                height: 15px;
+            }
+        }
+
+        .card {
+            padding: 0;
+            height: 10px;
+            min-height: 0;
+            display: none;
+
+            > .inner {
+                margin-top: -400px;
+            }
+        }
+
+        .sub-result {
+            @for $i from 1 through 3 {
+                &:nth-child(#{$i}) .card {
+                    display: block;
+                }
+            }
+        }
+    }
+    .sub-result {
+        @for $i from 1 through 10 {
+            &:nth-child(#{$i}) .card {
+                z-index: 100 - $i;
+            }
+        }
+    }
+}
+
+.result {
+    margin-bottom: 20px;
+    position: relative;
+
+    > .card {
+        z-index: 150;
+        min-height: 250px;
+
+        .details {
+            clear: both;
+            width: 370px;
+        }
+    }
+}
+
+.sub-result {
+    > .card {
+        z-index: 2;
+        min-height: 100px;
+        border-top: none;
+        //background: #eee;
+
+        dl {
+            @include column-count(2);
+            @include column-gap(20px);
+        }
+
+        header {
+            margin-bottom: 10px;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        .formatted-address {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+    }
+}
+
+
+
+.result.hide {
+    @include transform(rotate(8deg) translate(0, 1250px));
+
+    .sub-result {
+        display: none;
+    }
+}
+.result {
+    border: solid 1px #d9d9d9;
+    background: #fdfdfd;
+    margin-bottom: 20px;
+    @include transition(all 0.4s ease);
+}

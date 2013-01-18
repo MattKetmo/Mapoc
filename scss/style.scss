@@ -7,6 +7,11 @@ body {
     overflow-y: scroll;
 }
 
+.github-ribbon-container {
+    position: relative;
+    min-width: 700px;
+}
+
 //* { box-sizing: border-box }
 
 a {
@@ -23,7 +28,7 @@ a {
 }
 
 .site-content {
-    margin-top: 70px;
+    padding-top: 70px;
 }
 
 .search-form {

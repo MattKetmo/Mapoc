@@ -1,9 +1,13 @@
-http_path       = "../"
+#
+# Compass configuration
+#
+
+http_path = (environment == :production) ? "/" : "../"
+
 css_dir         = "css"
 sass_dir        = "scss"
 images_dir      = "images"
 javascripts_dir = "javascripts"
 
-line_comments   = false
-# output_style    = :expanded or :nested or :compact or :compressed
-# relative_assets = true
+line_comments = (environment == :production) ? false : true
+output_style  = (environment == :production) ? :compressed : :nested

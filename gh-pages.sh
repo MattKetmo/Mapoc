@@ -5,7 +5,7 @@ git branch -D gh-pages
 git checkout -b gh-pages master
 
 # Compile assets
-compass compile .
+compass compile . --env=production --force
 git add -f css
 git commit -m "Build GH pages"
 

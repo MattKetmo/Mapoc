@@ -28,11 +28,19 @@ a {
 }
 
 .site-content {
-    padding-top: 70px;
+    padding-top: 20px;
 }
 
 .site-header {
-    display: none;
+    padding-top: 20px;
+
+    h1 {
+        @include replace-text-with-dimensions('logo.png');
+        margin: auto;
+    }
+    p {
+        @include hide-text;
+    }
 }
 
 .search-form {

@@ -20,10 +20,6 @@ window.Location = (function() {
     }
 
     function Component(component) {
-        //this.long_name = component.long_name;
-        //this.short_name = component.short_name;
-    }
-    Component.prototype.fromData = function(component) {
         this.long_name = component.long_name;
         this.short_name = component.short_name;
         this.types = new Types(component.types);
@@ -39,44 +35,44 @@ window.Location = (function() {
     }
 
     function City(component) {
-        this.fromData(component);
+        Component.call(this, component);
     }
-    City.prototype = new Component();
+    City.prototype = Object.create(Component.prototype);
 
     function District(component) {
-        this.fromData(component);
+        Component.call(this, component);
     }
-    District.prototype = new Component();
+    District.prototype = Object.create(Component.prototype);
 
     function StreetName(component) {
-        this.fromData(component);
+        Component.call(this, component);
     }
-    StreetName.prototype = new Component();
+    StreetName.prototype = Object.create(Component.prototype);
 
     function StreetNumber(component) {
-        this.fromData(component);
+        Component.call(this, component);
     }
-    StreetNumber.prototype = new Component();
+    StreetNumber.prototype = Object.create(Component.prototype);
 
     function Region(component) {
-        this.fromData(component);
+        Component.call(this, component);
     }
-    Region.prototype = new Component();
+    Region.prototype = Object.create(Component.prototype);
 
     function County(component) {
-        this.fromData(component);
+        Component.call(this, component);
     }
-    County.prototype = new Component();
+    County.prototype = Object.create(Component.prototype);
 
     function Country(component) {
-        this.fromData(component);
+        Component.call(this, component);
     }
-    Country.prototype = new Component();
+    Country.prototype = Object.create(Component.prototype);
 
     function Zipcode(component) {
-        this.fromData(component);
+        Component.call(this, component);
     }
-    Zipcode.prototype = new Component();
+    Zipcode.prototype = Object.create(Component.prototype);
 
     function Location(result) {
         this.formatted_address = result.formatted_address;

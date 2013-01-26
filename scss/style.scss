@@ -1,6 +1,17 @@
 @import "compass";
 @import "compass/reset";
 
+// Overload Google Places Autocompletion style
+.pac-container {
+    .pac-item {
+        padding: 6px 8px;
+    }
+
+    &::after {
+        content: none;
+    }
+}
+
 body {
     background: #f4f4f4;
     font-family: Helvetica, arial, freesans, clean, sans-serif;

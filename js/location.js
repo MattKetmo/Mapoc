@@ -1,4 +1,7 @@
 window.Location = (function() {
+    //
+    // Coordinates
+    //
     function Coordinates(geometry) {
         this.latitude = geometry.location.lat();
         this.longitude = geometry.location.lng();
@@ -7,8 +10,12 @@ window.Location = (function() {
         return Number(this.latitude.toFixed(6)) + ',' + Number(this.longitude.toFixed(6));
     }
 
+    //
+    // Types
+    //
     function Types(types) {
         for (var i = 0; i < types.length; i++) {
+            // don't care about 'political' type
             if (types[i] !== 'political') {
                 this.push(types[i]);
             }
@@ -19,6 +26,9 @@ window.Location = (function() {
         return this.join(' ');
     }
 
+    //
+    // Component
+    //
     function Component(component) {
         this.long_name = component.long_name;
         this.short_name = component.short_name;
@@ -34,46 +44,9 @@ window.Location = (function() {
         return str;
     }
 
-    function City(component) {
-        Component.call(this, component);
-    }
-    City.prototype = Object.create(Component.prototype);
-
-    function District(component) {
-        Component.call(this, component);
-    }
-    District.prototype = Object.create(Component.prototype);
-
-    function StreetName(component) {
-        Component.call(this, component);
-    }
-    StreetName.prototype = Object.create(Component.prototype);
-
-    function StreetNumber(component) {
-        Component.call(this, component);
-    }
-    StreetNumber.prototype = Object.create(Component.prototype);
-
-    function Region(component) {
-        Component.call(this, component);
-    }
-    Region.prototype = Object.create(Component.prototype);
-
-    function County(component) {
-        Component.call(this, component);
-    }
-    County.prototype = Object.create(Component.prototype);
-
-    function Country(component) {
-        Component.call(this, component);
-    }
-    Country.prototype = Object.create(Component.prototype);
-
-    function Zipcode(component) {
-        Component.call(this, component);
-    }
-    Zipcode.prototype = Object.create(Component.prototype);
-
+    //
+    // Location
+    //
     function Location(result) {
         this.formatted_address = result.formatted_address;
         this.coordinates = new Coordinates(result.geometry);
@@ -84,31 +57,31 @@ window.Location = (function() {
             for (var type in cmpt.types) {
                 switch (cmpt.types[type]) {
                     case 'locality':
-                        this.city = new City(cmpt);
+                        this.city = new Component(cmpt);
                         break;
                     case 'sublocality':
-                        this.district = new District(cmpt);
+                        this.district = new Component(cmpt);
                         break;
                     case 'street_number':
-                        this.street_number = new StreetNumber(cmpt);
+                        this.street_number = new Component(cmpt);
                         break;
                     case 'route':
-                        this.street_name = new StreetName(cmpt);
+                        this.street_name = new Component(cmpt);
                         break;
                     case 'administrative_area_level_1':
-                        this.region = new Region(cmpt);
+                        this.region = new Component(cmpt);
                         break;
                     case 'administrative_area_level_2':
-                        this.county = new County(cmpt);
+                        this.county = new Component(cmpt);
                         break;
                     // case 'administrative_area_level_3':
-                    //     this.something = new What(cmpt);
+                    //     this.something = new Component(cmpt);
                     //     break;
                     case 'country':
-                        this.country = new Country(cmpt);
+                        this.country = new Component(cmpt);
                         break;
                     case 'postal_code':
-                        this.zipcode = new Zipcode(cmpt);
+                        this.zipcode = new Component(cmpt);
                         break;
                 }
             }
@@ -121,7 +94,6 @@ window.Location = (function() {
             || this.country
         ).long_name;
     }
-
     Location.prototype.toString = function() {
         return this.formatted_address;
     }

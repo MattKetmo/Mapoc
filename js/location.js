@@ -74,9 +74,9 @@ window.Location = (function() {
                     case 'administrative_area_level_2':
                         this.county = new Component(cmpt);
                         break;
-                    // case 'administrative_area_level_3':
-                    //     this.something = new Component(cmpt);
-                    //     break;
+                    case 'administrative_area_level_3':
+                        this.town = new Component(cmpt);
+                        break;
                     case 'country':
                         this.country = new Component(cmpt);
                         break;

@@ -89,6 +89,7 @@ window.Location = (function() {
 
         this.name = (this.city
             || this.district
+            || this.town
             || this.county
             || this.region
             || this.country

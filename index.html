@@ -42,7 +42,13 @@
 
         <div class="site-content">
             <form action="" class="search-form" method="get">
-                <input type="text" autofocus name="q" id="autocomplete" placeholder="Search a location...">
+                <div class="input-container">
+                    <a href="#" title="Current location" data-placement="left" class="locate">
+                        <span class="icon-device-access-location-off"></span>
+                    </a>
+                    <input type="text" autofocus name="q" id="autocomplete" placeholder="Search a location...">
+                </div>
+
                 <button type="submit" id="submit">
                     <span class="icon-action-search"></span>
                 </button>

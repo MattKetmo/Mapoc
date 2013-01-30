@@ -61,11 +61,33 @@ a {
     margin: auto;
     margin-bottom: 30px;
 
+    .input-container {
+        float: left;
+        width: 480px;
+        position: relative;
+    }
+
+    .locate {
+        position: absolute;
+        z-index: 10;
+        top: 4px;
+        right: -10px;
+        color: #aaa;
+        cursor: pointer;
+
+        &:hover {
+            color: #777;
+        }
+
+        > span {
+            font-size: 1.8em;
+        }
+    }
+
     input[type="text"] {
         display: inline-block;
-        float: left;
         padding: 4px 8px;
-        width: 480px;
+        width: 100%;
         height: 28px;
         font-size: 16px;
         line-height: 28px;
@@ -89,7 +111,7 @@ a {
 
     button[type="submit"] {
         float: left;
-        margin-left: 10px;
+        margin-left: 28px;
         display: inline-block;
         cursor: pointer;
         width: 85px;

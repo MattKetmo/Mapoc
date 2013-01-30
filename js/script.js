@@ -27,6 +27,12 @@ $(document).on('click', '.map img.static-map', function() {
     ;
 });
 
+$('.js-action-clear').on('click', function() {
+    $(input).val('');
+    clearResults();
+    input.focus();
+});
+
 
 //
 // Places autocomplete

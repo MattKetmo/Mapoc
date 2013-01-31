@@ -37,10 +37,11 @@ $('.js-action-clear').on('click', function() {
 //
 // Places autocomplete
 //
+var place = null;
 var options = {types: ['geocode']};
 var autocomplete = new google.maps.places.Autocomplete(input, options);
 google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    //var place = autocomplete.getPlace();
+    place = autocomplete.getPlace();
 });
 
 //
@@ -58,6 +59,12 @@ $('form').on('submit', function(evt) {
             return;
         }
 
+        if (place) {
+            var placeLocation = new Location(place);
+            displayLocation(placeLocation);
+            return;
+        }
+
         for (var i = 0; i < results.length; i++) {
             var location = new Location(results[i]);
 
@@ -70,11 +77,16 @@ $('form').on('submit', function(evt) {
     });
 });
 
+$(input).on('keyup', function googleAutocompleteAutoclear(){
+    place = null;
+});
+
 //
 // Results display
 //
 function clearResults() {
     $('.results').html('');
+    place = null;
 }
 
 function displayLocation(location) {

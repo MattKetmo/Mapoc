@@ -82,6 +82,13 @@ a {
             &:hover {
                 color: #777;
             }
+
+            &.active {
+                color: #3079ed;
+            }
+            &.error {
+                color: #e64d48;
+            }
         }
     }
 

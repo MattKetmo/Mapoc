@@ -128,3 +128,53 @@ function displaySubResults($result) {
         }, 100);
     });
 }
+
+//
+// Geolocalisation
+//
+if (navigator.geolocation) {
+    $('.js-action-geolocalisation').click(function displayCurrentPosition() {
+        var $icon = $(this);
+        $icon.addClass('active');
+
+        // Blink search icon
+        var intervalId = setInterval(function() {
+            $icon.toggleClass('icon-device-access-location-found');
+            $icon.toggleClass('icon-device-access-location-searching');
+        }, 700);
+
+        console.log('current position...');
+        navigator.geolocation.getCurrentPosition(
+            function getCurrentPosition(position) {
+                console.log(position);
+
+                // Display found icon
+                clearInterval(intervalId);
+                $icon.removeClass('icon-device-access-location-searching');
+                $icon.addClass('icon-device-access-location-found');
+            }, function errorPosition(error) {
+                switch(error.code) {
+                    case error.TIMEOUT:
+                        break;
+                    case error.PERMISSION_DENIED:
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        break;
+                };
+
+                // Display error icon
+                $icon.removeClass('active');
+                $icon.addClass('error');
+                clearInterval(intervalId);
+                $icon.removeClass('icon-device-access-location-searching');
+                $icon.removeClass('icon-device-access-location-found');
+                $icon.addClass('icon-device-access-location-off');
+            }, {
+                maximumAge: 0,
+                timeout: 30
+            }
+        )
+    });
+}

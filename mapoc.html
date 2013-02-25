@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" ng-app="mapoc">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapoc</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&language=en"></script>
+    <script src="src/app.js"></script>
+    <script src="src/controllers.js"></script>
+    <script src="src/services.js"></script>
+</head>
+<body>
+    <div ng-controller="LocationSearchCtrl">
+        <form ng-submit="search()">
+            <input type="text" ng-model="searchTxt" autofocus>
+            <button type="submit">Search</button>
+        </form>
+
+        <section class="results">
+            <artciel ng-repeat="location in locations">
+                <h2>{{ location.title }}</h2>
+            </article>
+        </section>
+    </div>
+</body>
+</html>

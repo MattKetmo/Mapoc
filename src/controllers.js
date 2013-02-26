@@ -5,6 +5,11 @@
 function LocationSearchCtrl($scope, Geocoder) {
     $scope.locations = [];
 
+    $scope.clear = function() {
+        $scope.locations = [];
+        $scope.searchTxt = '';
+    }
+
     $scope.search = function() {
         $scope.locations = [];
 

@@ -15,6 +15,7 @@
         <form ng-submit="search()">
             <input type="text" ng-model="searchTxt" autofocus>
             <button type="submit">Search</button>
+            <a href="#" ng-show="searchTxt" ng-click="clear()">&times;</a>
         </form>
 
         <section class="results">

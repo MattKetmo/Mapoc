@@ -24,7 +24,7 @@ function LocationSearchCtrl($scope, Geocoder) {
             }
 
             for (var i = 0; i < results.length; i++) {
-                $scope.locations.push({title: results[i].formatted_address});
+                $scope.locations.push(new Location(results[i]));
             }
 
             $scope.$apply();

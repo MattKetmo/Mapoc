@@ -8,6 +8,7 @@
     <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&language=en"></script>
     <script src="src/app.js"></script>
     <script src="src/controllers.js"></script>
+    <script src="src/models.js"></script>
     <script src="src/services.js"></script>
 </head>
 <body>
@@ -20,7 +21,11 @@
 
         <section class="results">
             <artciel ng-repeat="location in locations">
-                <h2>{{ location.title }}</h2>
+                <h2>{{ location.name }}</h2>
+                <p>{{ location.formatted_address }}</p>
+                <ul>
+                    <li ng-show="location.zipcode">{{ location.zipcode|s }}</li>
+                </ul>
             </article>
         </section>
     </div>

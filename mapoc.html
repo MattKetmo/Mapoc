@@ -4,30 +4,88 @@
     <meta charset="UTF-8">
     <title>Mapoc</title>
 
+    <link href="css/tooltip.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/icons.css" rel="stylesheet">
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&language=en"></script>
     <script src="src/app.js"></script>
     <script src="src/controllers.js"></script>
     <script src="src/models.js"></script>
     <script src="src/services.js"></script>
-</head>
-<body>
-    <div ng-controller="LocationSearchCtrl">
-        <form ng-submit="search()">
-            <input type="text" ng-model="searchTxt" autofocus>
-            <button type="submit">Search</button>
-            <a href="#" ng-show="searchTxt" ng-click="clear()">&times;</a>
-        </form>
 
-        <section class="results">
-            <artciel ng-repeat="location in locations">
-                <h2>{{ location.name }}</h2>
-                <p>{{ location.formatted_address }}</p>
-                <ul>
-                    <li ng-show="location.zipcode">{{ location.zipcode|s }}</li>
-                </ul>
-            </article>
-        </section>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="js/tooltip.js"></script>
+    <script>
+        $(document).tooltip({selector: ".tip"});
+    </script>
+</head>
+<body ng-controller="LocationSearchCtrl">
+    <div class="site-container">
+        <header class="site-header">
+            <h1>Mapoc</h1>
+            <p>Helps you visualize Google Maps geocoding results</p>
+        </header>
+
+        <div class="site-content">
+            <form ng-submit="search()" class="search-form">
+                <div class="input-container">
+                    <a href="#" title="Current location" data-placement="left" class="locate" style="display:none;">
+                        <span class="icon-device-access-location-off"></span>
+                    </a>
+                    <div href="#" class="left-action">
+                        <span ng-show="searchTxt || locations" ng-click="clear()" class="icon-navigation-cancel js-action-clear"></span>
+                    </div>
+                    <input type="text" ng-model="searchTxt" autofocus name="q" id="autocomplete" placeholder="Search a location...">
+                </div>
+
+                <button type="submit" id="submit">
+                    <span class="icon-action-search"></span>
+                </button>
+                <div style="clear:both;"></div>
+            </form>
+
+            <section id="geocoding-results" class="results">
+                <article class="result" ng-repeat="location in locations">
+                    <div class="card">
+                        <div class="inner">
+                            <div class="map"></div>
+                            <div class="details">
+                                <header>
+                                    <p class="types">{{ location.types.toString() }}</p>
+                                    <h2>{{ location.name }}</h2>
+                                    <p class="formatted-address">{{ location.formatted_address }}</p>
+                                </header>
+
+                                <dl>
+                                    <dt ng-show="location.city"><span class="tip" title="{{ location.city.types.toString() }}" data-placement="right">City</span></dt>
+                                        <dd ng-show="location.city">{{ location.city.toString() }}</dd>
+                                    <dt ng-show="location.town"><span class="tip" title="{{ location.town.types.toString() }}" data-placement="right">Town</span></dt>
+                                        <dd ng-show="location.town">{{ location.town.toString() }}</dd>
+                                    <dt ng-show="location.district"><span class="tip" title="{{ location.district.types.toString() }}" data-placement="right">District</span></dt>
+                                        <dd ng-show="location.district">{{ location.district.toString() }}</dd>
+                                    <dt ng-show="location.street_number"><span class="tip" title="{{ location.street_number.types.toString() }}" data-placement="right">Street Number</span></dt>
+                                        <dd ng-show="location.street_number">{{ location.street_number.toString() }}</dd>
+                                    <dt ng-show="location.street_name"><span class="tip" title="{{ location.street_name.types.toString() }}" data-placement="right">Street Name</span></dt>
+                                        <dd ng-show="location.street_name">{{ location.street_name.toString() }}</dd>
+                                    <dt ng-show="location.street_name"><span class="tip" title="{{ location.county.types.toString() }}" data-placement="right">County</span></dt>
+                                        <dd ng-show="location.c">{{ location.county.toString() }}</dd>
+                                    <dt ng-show="location.region"><span class="tip" title="{{ location.region.types.toString() }}" data-placement="right">Region</span></dt>
+                                        <dd ng-show="location.region">{{ location.region.toString() }}</dd>
+                                    <dt ng-show="location.country"><span class="tip" title="{{ location.country.types.toString() }}" data-placement="right">Country</span></dt>
+                                        <dd ng-show="location.country">{{ location.country.toString() }}</dd>
+                                    <dt ng-show="location.zipcode"><span class="tip" title="{{ location.zipcode.types.toString() }}" data-placement="right">Zipcode</span></dt>
+                                        <dd ng-show="location.zipcode">{{ location.zipcode.toString() }}</dd>
+                                    <dt ng-show="location.coordinates">Coordinates</dt>
+                                        <dd ng-show="location.coordinates">{{ location.coordinates.toString() }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </div>
     </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 # Compass configuration
 #
 
-http_path = (environment == :production) ? "/" : "../"
+http_path = "../"
 
 css_dir         = "css"
 sass_dir        = "scss"
